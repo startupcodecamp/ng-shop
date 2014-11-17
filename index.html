@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="shoppingCart">
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <meta charset="utf-8">
+    <title>Shopping~</title>
+</head>
+<body ng-controller="shopCtrl">
+    <ul>
+        <li ng-repeat="product in products">
+            <ul>
+                <li>
+                    <img ng-src="{{ '/images/' + product.thumb }}" />
+                </li>
+                <li><big>{{product.name}}</big></li>
+                <li>{{product.desc}}</li>
+                <li>{{product.price | currency}}</li>
+                <li>
+                    <input type="number" ng-model="product.qty" min="0">
+                    <button ng-click="addToCart(product)">ADD</button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <br /><br />
+    <table>
+        <tr>
+            <th>Qty</th><th>Product</th><th>Price</th>
+        </tr>
+        <tr ng-repeat="item in cart">
+            <td>{{item.qty}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.price | currency}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Subtotal: </td>
+            <td>{{subTotal() | currency}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Tax 6%: </td>
+            <td>{{subTotal() * 0.06 | currency}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Total: </td>
+            <td>{{subTotal() * 1.06 | currency}}</td>
+        </tr>
+        
+    </table>
+</body>
+</html>
